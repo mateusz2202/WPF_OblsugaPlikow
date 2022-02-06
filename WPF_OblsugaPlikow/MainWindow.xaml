@@ -5,8 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_OblsugaPlikow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Przyklad" Height="600" Width="800">
+    <Grid Background="Black">
+        <Label Foreground="White" 
+               FontSize="30" 
+               HorizontalAlignment="Center">Zarządzanie danymi z pliku</Label>
+        <Grid Margin="0 50 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="10">
+                <Label Foreground="White" 
+               FontSize="30" 
+               HorizontalAlignment="Center">Dodaj</Label>
+                <StackPanel VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+                    <Label Foreground="White" 
+                   FontSize="20">Imie nazwisko:</Label>
+                    <TextBox x:Name="TB_ImieNazwisko"
+                         FontSize="20"
+                         MaxLength="40"></TextBox>
+                    <Label Foreground="White"
+                FontSize="20">Wiek:</Label>
+                    <TextBox x:Name="TB_Wiek" 
+                         FontSize="20" 
+                         Width="300"
+                         MaxLength="3"
+                         PreviewTextInput="ValidationTextBoxOnlyNumber" >
+                    </TextBox>
+                    <Button x:Name="BT_Akcja"
+                    FontSize="20" 
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Width="100"
+                    Click="BT_Dodaj_Click">Dodaj</Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10">
+                <Label Foreground="White" 
+               FontSize="30" 
+               HorizontalAlignment="Center">Przeglądaj</Label>
+                <DataGrid x:Name="DG_dane"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      MaxHeight="400"
+                      ScrollViewer.VerticalScrollBarVisibility="Visible"
+                      FontSize="20"
+                      AutoGenerateColumns="False" CanUserAddRows="False"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Imie Nazwisko" Width="auto" Binding="{Binding ImieNazwisko}"/>
+                        <DataGridTextColumn Header="Wiek" Width="100" Binding="{Binding Wiek}"/>
+                        <DataGridTemplateColumn Header="Edycja" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Edycja" Click="BT_Edycja_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Usuń" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Usuń" Click="BT_Usun_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+                        Width="100" 
+                        Margin="10" 
+                        FontSize="20" 
+                        Click="BT_Restet_Click">Reset</Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
 
     </Grid>
 </Window>
